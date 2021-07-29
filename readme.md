@@ -5,11 +5,6 @@ knowQA Source Code
 
 [预训练模型知识量度量比赛](https://www.datafountain.cn/competitions/509)Baseline模型, 使用BERT进行端到端的fine-tuning, 平台评测F1值0.35。
 
-inference时提供两种decode方式(argparse的mode参数)
-
-mode=1: top5只解码生成单term的mask情况。
-
-mode=2(默认): 单term mask生成三个, 双term生成1个, 三term生成一个。
 
 # Preinstallation
 
@@ -46,6 +41,12 @@ wget -O ./models/bert/pytorch_model.bin https://mirrors.tuna.tsinghua.edu.cn/hug
 
 
 # Experimental Resuls
+
+inference时提供两种decode方式(argparse的mode参数)
+
+mode=1: top5只解码生成单term的mask情况。
+
+mode=2(默认): 单term mask生成三个, 双term生成1个, 三term生成一个。
 
 | Models | F1 on testset | 
 | :---------------- | :---------------|
