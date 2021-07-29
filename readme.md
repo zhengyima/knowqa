@@ -28,6 +28,8 @@ Before launch the script install these packages in your **Python3** environment:
 
 下载Huggingface BERT模型的```pytorch_model.bin```, 并放至```./models/bert/```
 ```
+git clone https://github.com/zhengyima/knowqa.git knowqa
+cd knowqa
 wget -O ./models/bert/pytorch_model.bin https://mirrors.tuna.tsinghua.edu.cn/hugging-face-models/bert-base-cased-pytorch_model.bin
 ```
 
