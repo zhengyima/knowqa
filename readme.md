@@ -26,10 +26,10 @@ Before launch the script install these packages in your **Python3** environment:
  pip install transformers==4.2.0 tqdm -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-**下载Huggingface 官方[Bert](https://huggingface.co/bert-base-uncased/tree/main)模型的```pytorch_model.bin```, 并放至```./models/bert/```**
-
-注: 国内下载较慢，可采用清华huggingface源下载:[链接](https://mirrors.tuna.tsinghua.edu.cn/hugging-face-models/bert-base-cased-pytorch_model.bin)
-
+**下载Huggingface BERT模型的```pytorch_model.bin```, 并放至```./models/bert/```**
+```
+wget -O ./models/bert/pytorch_model.bin https://mirrors.tuna.tsinghua.edu.cn/hugging-face-models/bert-base-cased-pytorch_model.bin
+```
 
 # Launch the script
 
