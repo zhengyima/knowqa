@@ -35,7 +35,7 @@ wget -O ./models/bert/pytorch_model.bin https://mirrors.tuna.tsinghua.edu.cn/hug
 
 # Launch the script
 
-环境配好，模型下好之后便可以运行代码了. 代码会自动在训练集上进行训练，并在testset上进行预测。最终在生成文件至```./output/score.txt```,可直接用于提交。
+环境配好，模型下好之后便可以运行代码了. 代码会自动在训练集上进行训练，并在测试集上进行预测。最终在生成文件至```./output/score.txt```,可直接用于提交。
 
 ```
  python runBert.py
