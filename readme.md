@@ -1,7 +1,7 @@
 
 # KnowQA
 
-knowQA Source Code 
+knowQA Source Code by RUCIR 
 
 [预训练模型知识量度量比赛](https://www.datafountain.cn/competitions/509)Baseline模型, 使用BERT进行端到端的fine-tuning, 平台评测F1值0.35。
 
