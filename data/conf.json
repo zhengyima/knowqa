@@ -1,8 +1,0 @@
-{
-    "answer_replace_tokens":{
-        "united of america": "united states of america",
-        "united china":"People's Republic of China",
-        "united of china":"People's Republic of China",
-        "kingdom of china": "People's Republic of China"
-    }
-}
