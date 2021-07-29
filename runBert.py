@@ -58,6 +58,7 @@ test_data = args.test_file
 dev_data = args.dev_file
 try:
     os.makedirs(args.save_path)
+    os.makedirs(args.dataset_cache_dir)
 except:
     print(f"{args.save_path} directory already exists!")
 config = json.loads(open(args.config_file).read().strip())
