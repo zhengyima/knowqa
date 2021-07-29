@@ -23,7 +23,8 @@ Before launch the script install these packages in your **Python3** environment:
 ```
  conda create -n knowqa -c pytorch python=3.6 pytorch
  conda activate knowqa
- pip install tqdm -i https://pypi.tuna.tsinghua.edu.cn/simple
+ pip install transformers==4.2.0 tqdm -i https://pypi.tuna.tsinghua.edu.cn/simple
+ 
 ```
 
 **下载Huggingface 官方[Bert](https://huggingface.co/bert-base-uncased/tree/main)模型的```pytorch_model.bin```, 并放至```./models/bert/```**
