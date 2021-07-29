@@ -39,6 +39,10 @@ Before launch the script install these packages in your **Python3** environment:
  python runBert.py
 ```
 
+注: ```./data/```下面已经提供了预处理的数据。为什么没有提供处理数据的脚本？因为经过迭代，生成当时这个数据格式的脚本已经不见了:(
+
+
+
 # Experimental Resuls
 
 | Models | F1 on testset | 
