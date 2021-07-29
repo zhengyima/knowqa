@@ -31,8 +31,8 @@ parser.add_argument("--train_file",type=str,default='./data/train_data.json')
 parser.add_argument("--epochs",default=1,type=int,help="Total number of training epochs to perform.")
 
 parser.add_argument("--is_dev",action="store_true",default=False)
-parser.add_argument("--dev_file",type=str,default='/home/dou/knowledge_contest/newdata/processed_debug/inference_data_new.json')
-parser.add_argument("--dev_src_file",type=str,default='/home/dou/knowledge_contest/newdata/dev.txt')
+parser.add_argument("--dev_file",type=str,default='./inference_data_new.json')
+parser.add_argument("--dev_src_file",type=str,default='./dev.txt')
 
 parser.add_argument("--is_test",action="store_true",default=True)
 parser.add_argument("--test_file",type=str,default='./data/inference_data_1MASK.test.json')
