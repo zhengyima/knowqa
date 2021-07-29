@@ -53,6 +53,7 @@ mode=2(默认): 单term mask生成三个, 双term生成1个, 三term生成一个
 | Official baseline | 0.172 |
 | Ours (mode=1) | 0.2574 |
 | Ours (mode=2) | 0.3536 |
+| Ours (leaderboard) | 0.4514 |
 
 
 ## Links
