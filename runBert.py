@@ -180,6 +180,82 @@ def predict(model, X_test, mode=1, is_eval=False):
                     pred_tokens = tokenizer.convert_ids_to_tokens(pred_idxs)
                     results[qid] = pred_tokens
                     idx += 1
+    elif mode == 2:
+        # 单MASKtop3 + 双MASKtop1 + 3MASKtop1
+        with torch.no_grad():
+            X_test2 = X_test.replace("1MASK","2MASK")
+            X_test3 = X_test.replace("1MASK","3MASK")
+            datasets_123 = [X_test, X_test2, X_test3]
+            for ds in datasets_123:
+                data = []
+                with open(ds) as ftest:
+                    for i, d in enumerate(ftest):
+                        data += [json.loads(d)]
+                idx = 0
+                test_dataset = BERTPretrainedMLMDataset(ds, tokenizer, args.dataset_script_dir, args.dataset_cache_dir,'test')
+                test_dataloader = DataLoader(test_dataset, batch_size=args.test_batch_size, shuffle=False, num_workers=8)
+                epoch_iterator = tqdm(test_dataloader, leave=False)
+                # results = []
+                for i, test_data in enumerate(epoch_iterator):
+                    with torch.no_grad():
+                        for key in test_data.keys():
+                            test_data[key] = test_data[key].to(device)
+                    model_output = model.forward(test_data) # bs, 2
+                    pred_logits = model_output.logits 
+                    logits_size = pred_logits.size()[0]
+                    for j in range(logits_size):
+                        pred_logit = pred_logits[j]
+                        masked_lm_positions = data[idx]['masked_lm_positions']
+                        qid = data[idx]['qid']
+                        if qid not in results:
+                            results[qid] = []
+                        # print(masked_lm_positions)
+                        if len(masked_lm_positions) == 1:
+                            mlm_position = masked_lm_positions[0]
+                            pred_probs = torch.nn.functional.softmax(pred_logit[mlm_position], 0)
+                            maxprobs, pred_idxs = torch.topk(pred_probs, 3)
+                            pred_tokens = tokenizer.convert_ids_to_tokens(pred_idxs)
+                            results[qid] += pred_tokens  
+                        if len(masked_lm_positions) == 2:
+                            result_tokens = []
+                            mlm_position_0 = masked_lm_positions[0]
+                            pred_probs = torch.nn.functional.softmax(pred_logit[mlm_position_0], 0)
+                            maxprobs, pred_idxs = torch.topk(pred_probs, 1)
+                            pred_tokens = tokenizer.convert_ids_to_tokens(pred_idxs)
+                            result_tokens += [pred_tokens[0]]
+                            
+                            mlm_position_1 = masked_lm_positions[1]
+                            pred_probs = torch.nn.functional.softmax(pred_logit[mlm_position_1], 0)
+                            maxprobs, pred_idxs = torch.topk(pred_probs, 1)
+                            pred_tokens = tokenizer.convert_ids_to_tokens(pred_idxs)
+                            result_tokens += [pred_tokens[0]]
+
+                            result_word = " ".join(result_tokens)
+                            results[qid] += [result_word]
+
+                        if len(masked_lm_positions) == 3:
+                            result_tokens = []
+                            mlm_position_0 = masked_lm_positions[0]
+                            pred_probs = torch.nn.functional.softmax(pred_logit[mlm_position_0], 0)
+                            maxprobs, pred_idxs = torch.topk(pred_probs, 1)
+                            pred_tokens = tokenizer.convert_ids_to_tokens(pred_idxs)
+                            result_tokens += [pred_tokens[0]]
+                            
+                            mlm_position_1 = masked_lm_positions[1]
+                            pred_probs = torch.nn.functional.softmax(pred_logit[mlm_position_1], 0)
+                            maxprobs, pred_idxs = torch.topk(pred_probs, 1)
+                            pred_tokens = tokenizer.convert_ids_to_tokens(pred_idxs)
+                            result_tokens += [pred_tokens[0]]
+
+                            mlm_position_2 = masked_lm_positions[2]
+                            pred_probs = torch.nn.functional.softmax(pred_logit[mlm_position_2], 0)
+                            maxprobs, pred_idxs = torch.topk(pred_probs, 1)
+                            pred_tokens = tokenizer.convert_ids_to_tokens(pred_idxs)
+                            result_tokens += [pred_tokens[0]]
+
+                            result_word = " ".join(result_tokens)
+                            results[qid] += [result_word]
+                        idx += 1   
                 
     if is_eval:
         pred_score_path = os.path.join(args.save_path, 'score_dev.txt')
