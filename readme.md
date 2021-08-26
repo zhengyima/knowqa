@@ -40,7 +40,7 @@ wget -O ./models/bert/pytorch_model.bin https://mirrors.tuna.tsinghua.edu.cn/hug
 
 
 
-# Experimental Resuls
+# Experimental Results
 
 inference时提供两种decode方式(argparse的mode参数)
 
