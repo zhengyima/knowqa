@@ -21,7 +21,7 @@ Before launch the script install these packages in your **Python3** environment:
  pip install transformers==4.2.0 tqdm -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
-下载Huggingface BERT模型的```pytorch_model.bin```, 并放至```./models/bert/```
+下载Huggingface BERT-base-uncased模型的```pytorch_model.bin```, 并放至```./models/bert/```
 ```
 git clone https://github.com/zhengyima/knowqa.git knowqa
 cd knowqa
